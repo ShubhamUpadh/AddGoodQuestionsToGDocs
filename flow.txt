@@ -1,0 +1,7 @@
+The flow will be as 
+1. Search for the files in the given directory
+    1.1 The directory address will be provided by me, so no worries about that
+2. If there has been any new files that have been added that contain lowercase('GOOD') in the last 4 letters,
+   just copy the contents of the file and upload the code to the doc
+3. After doing this send a message on WhatsApp / Mail that this change has been pushed
+
