@@ -1,6 +1,7 @@
 # Open file in the given directory and then check if the file has good in its name in last 4 place
 
 import os
+import codecs
 
 class QuestionRev:
     def __init__(self):
@@ -17,7 +18,19 @@ class QuestionRev:
         self.filesList = [x for x in self.filesList if x[-10:-6].lower() == 'good']
         print(100,100)
         print(self.filesList)
+    
+    def openTheFiles(self):
+        # We will open the filtered files and will place their content
+        #for file in self.filesList:
+        f = codecs.open(self.directories[0] + r'\\' + self.filesList[0])
+        print(f.read())
+            
+    
+    def execute(self):
+        self.createList()
+        self.filterFiles()
 
 q = QuestionRev()
 q.createList()
 q.filterFiles()
+q.openTheFiles()

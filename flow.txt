@@ -5,3 +5,7 @@ The flow will be as
    just copy the contents of the file and upload the code to the doc
 3. After doing this send a message on WhatsApp / Mail that this change has been pushed
 
+Challenges
+1. I want to ensure that we don't write those files again that have been written already <- Create a logic
+    1.1 I can check if the current file has been created after the last time the code ran, and then only upload
+        the changes
