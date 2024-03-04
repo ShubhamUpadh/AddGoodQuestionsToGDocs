@@ -2,6 +2,7 @@
 
 import os
 import codecs
+import nbformat
 
 class QuestionRev:
     def __init__(self):
@@ -24,7 +25,21 @@ class QuestionRev:
         #for file in self.filesList:
         f = codecs.open(self.directories[0] + r'\\' + self.filesList[0])
         print(f.read())
-            
+        f.close()
+    
+    def openTheFiles2(self):
+        print(self.filesList[0])
+        # We will open the filtered files and will place their content
+        with open(self.directories[0] + r'\\' + self.filesList[0],"r") as notebookFile:
+            notebookContent = nbformat.read(notebookFile,as_version=4)
+        for cell in notebookContent.cells:
+            if cell.cell_type == "code":
+                print("Code :")
+                print(cell.source)
+            elif cell.cell_type == "markdown":
+                print("MarkDown")
+                print(cell.source)
+        
     
     def execute(self):
         self.createList()
@@ -33,4 +48,4 @@ class QuestionRev:
 q = QuestionRev()
 q.createList()
 q.filterFiles()
-q.openTheFiles()
+q.openTheFiles2()
