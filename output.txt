@@ -254,3 +254,9 @@ def SequentialDigitsGood(low,high):
     return res
 
 
+
+__________________________________________________________________________
+17LightBulbProblemGood.ipynb
+def lightBulb(arr):
+    print(arr)
+    
