@@ -1,7 +1,7 @@
 # Open file in the given directory and then check if the file has good in its name in last 4 place
 
 import os
-import codecs
+#import codecs
 import nbformat
 
 class QuestionRev:
@@ -42,16 +42,18 @@ class QuestionRev:
         print(self.filesList)
                 
     def openTheFiles(self):
+        dashedLine = '\n' + "_"*74 + '\n'
         for i in range(len(self.filesList)):
             currFileName = self.filesList[i]
-            self.filesContent.append("\n")
+            self.filesContent.append(dashedLine)
+            #self.filesContent.append("\n")
             self.filesContent.append(currFileName + "\n")
         # We will open the filtered files and will place their content
             with open(self.directories[0] + r'\\' + currFileName,"r") as notebookFile:
                 notebookContent = nbformat.read(notebookFile,as_version=4)
             for cell in notebookContent.cells:
                 if cell.cell_type == "code":
-                    self.filesContent.append(cell.source + "\n")        # the type of cell.content = str
+                    self.filesContent.append(cell.source + "\n")        # the type of cell.source = str
     
     def writeTheContentToFile(self):
         with open("output.txt","w") as outputFile:

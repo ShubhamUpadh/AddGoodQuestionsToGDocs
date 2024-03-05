@@ -6,6 +6,7 @@ from google.auth.transport.requests import Request
 import io
 import pickle
 import os
+import time
 
 scopes = ['https://www.googleapis.com/auth/drive']
 credsFile = "credentials.json"
@@ -50,11 +51,18 @@ def appendToFile(fileID,additionalContent):
     currentContent = service.files().get_media(fileId = fileID).execute()
     print(currentContent,type(currentContent))
     return True
-    
+startTime = time.time()  
+with open('fileName.txt','r') as file:
+    fileID = file.read()
+#print(fileID,type(fileID))
+#fileID = "1iptEZfA0p6ZZThUrPaOS4O44f7umeWwdvUG4Jjc_kSw"
 
-fileID = "1iptEZfA0p6ZZThUrPaOS4O44f7umeWwdvUG4Jjc_kSw"
-newContent ="Hello Testing4"
-print(appendToFile(fileID,additionalContent = newContent))
+newCodes = None
+with open('output.txt','r') as file:
+    newCodes = file.read()
+#print(newCodes, type(newCodes))
+print(appendToFile(fileID,additionalContent = newCodes))
+print(f"Time taken is {time.time()-startTime}")
 #updatedFile = updateFile(fileID,newContent)
 #print('File updated : ',updatedFile)
     

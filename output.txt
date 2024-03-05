@@ -1,4 +1,5 @@
 
+__________________________________________________________________________
 02ShiftAll0ToEndGOOD.ipynb
 def moveZeroes(self, nums: List[int]) -> None:
         """
@@ -21,6 +22,7 @@ def moveZeroes(self, nums: List[int]) -> None:
             slow = slow + 1
             fast = fast + 1
 
+__________________________________________________________________________
 04RotateLeftByKStepsGood.ipynb
 def reverse(arr,lower,upper):
     while lower < upper:
@@ -33,6 +35,7 @@ def leftKSteps(arr,k):
     reverse(arr,0,n-k-1)
     reverse(arr,n-k,n-1)
 
+__________________________________________________________________________
 06FindELementThatOccursOnceInSortedArrayGood.ipynb
 def numberOccursOnce(arr):
     for i in range(len(arr)):
@@ -50,6 +53,7 @@ def numberOccursOnce(arr):
         else:
             return arr[mid]
 
+__________________________________________________________________________
 09AlternateNumbersGood.ipynb
 # an array contains equal number of negative and positive integers
 # return an array that has alternate pos, neg numbers
@@ -105,6 +109,7 @@ def rearrange(self,arr, n):
             #print(arr[:j+1])
             p2 += 1
 
+__________________________________________________________________________
 10NextArrayPermutationGood.ipynb
 # https://leetcode.com/problems/next-permutation/description/
 def nextPermutation(self, nums: List[int]) -> None:
@@ -138,6 +143,7 @@ def nextPermutation(self, nums: List[int]) -> None:
         upper -= 1
 
 
+__________________________________________________________________________
 12InversionsOfArrayGood.ipynb
 Given an array of N integers, count the inversion of the array
 
@@ -151,6 +157,7 @@ def inversions(arr):
                 count += 1
     return count
 
+__________________________________________________________________________
 13SquareSortedGood.ipynb
 def squareSorted(arr):
     return sorted([x*x for x in arr])
@@ -194,6 +201,7 @@ def sortedSquares(nums: List[int]) -> List[int]:
 
 
 
+__________________________________________________________________________
 15CreateFrequencyArrayIfTheElementsCanBeVeryLargeGood.ipynb
 
 def findOccurences(self, A):
@@ -213,6 +221,7 @@ def findOccurences(self, A):
     # Extract only the occurrence counts and return
     return [occ[1] for occ in occurrences]
 
+__________________________________________________________________________
 16SequentialDigitsGood.ipynb
 def SequentialDigitsGood(low,high):
     string = "123456789"
