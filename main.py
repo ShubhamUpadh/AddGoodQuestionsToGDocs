@@ -61,6 +61,18 @@ class QuestionRev:
                 outputFile.write(self.filesContent[i])
         fileSize = os.path.getsize("output.txt")
         print(f"Output.txt of file size {fileSize} has been written")
+    
+    def updateTheLastQuestionNumber(self):
+        lastFileName = self.filesList[-1]
+        lastFileNumber = ""
+        for i in lastFileName:
+            if i.isnumeric():
+                lastFileNumber += i
+            else:
+                break
+        with open("lastUsedFile.txt","w") as outputFile:
+            outputFile.write(lastFileNumber)
+        
             
     
     def execute(self):
@@ -69,6 +81,7 @@ class QuestionRev:
         self.filterNewFiles()
         self.openTheFiles()
         self.writeTheContentToFile()
+        self.updateTheLastQuestionNumber()
 
 q = QuestionRev()
 q.execute()
