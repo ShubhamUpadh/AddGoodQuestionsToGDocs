@@ -1,8 +1,5 @@
+
 02ShiftAll0ToEndGOOD.ipynb
-
-
-
-
 def moveZeroes(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
@@ -24,14 +21,7 @@ def moveZeroes(self, nums: List[int]) -> None:
             slow = slow + 1
             fast = fast + 1
 
-
-
-
 04RotateLeftByKStepsGood.ipynb
-
-
-
-
 def reverse(arr,lower,upper):
     while lower < upper:
         arr[lower], arr[upper] = arr[upper], arr[lower]
@@ -43,14 +33,7 @@ def leftKSteps(arr,k):
     reverse(arr,0,n-k-1)
     reverse(arr,n-k,n-1)
 
-
-
-
 06FindELementThatOccursOnceInSortedArrayGood.ipynb
-
-
-
-
 def numberOccursOnce(arr):
     for i in range(len(arr)):
         if i % 2 == 0:
@@ -67,14 +50,7 @@ def numberOccursOnce(arr):
         else:
             return arr[mid]
 
-
-
-
 09AlternateNumbersGood.ipynb
-
-
-
-
 # an array contains equal number of negative and positive integers
 # return an array that has alternate pos, neg numbers
 # 0 is positive
@@ -92,10 +68,6 @@ def alternateNumbers(arr):
             res[posId] = arr[i]
             posId += 2
     return res
-
-
-
-
 '''
 Given an unsorted array Arr of N positive and negative numbers. Your task is to create an array of alternate positive and negative numbers without changing the relative order of positive and negative numbers.
 Note: Array should start with a positive number and 0 (zero) should be considered a positive element.
@@ -133,14 +105,7 @@ def rearrange(self,arr, n):
             #print(arr[:j+1])
             p2 += 1
 
-
-
-
 10NextArrayPermutationGood.ipynb
-
-
-
-
 # https://leetcode.com/problems/next-permutation/description/
 def nextPermutation(self, nums: List[int]) -> None:
     """
@@ -173,14 +138,7 @@ def nextPermutation(self, nums: List[int]) -> None:
         upper -= 1
 
 
-
-
-
 12InversionsOfArrayGood.ipynb
-
-
-
-
 Given an array of N integers, count the inversion of the array
 
 What is an inversion of an array? Definition: for all i & j < size of array, if i < j then you have to find
@@ -193,25 +151,10 @@ def inversions(arr):
                 count += 1
     return count
 
-
-
-
 13SquareSortedGood.ipynb
-
-
-
-
 def squareSorted(arr):
     return sorted([x*x for x in arr])
-
-
-
-
 print(squareSorted([-1,-2,0,1]))
-
-
-
-
 #https://leetcode.com/problems/squares-of-a-sorted-array/
 def sortedSquares(nums: List[int]) -> List[int]:
     i = 0
@@ -251,14 +194,7 @@ def sortedSquares(nums: List[int]) -> List[int]:
 
 
 
-
-
-
 15CreateFrequencyArrayIfTheElementsCanBeVeryLargeGood.ipynb
-
-
-
-
 
 def findOccurences(self, A):
 # Dictionary to store the occurrences of each number
@@ -277,14 +213,7 @@ def findOccurences(self, A):
     # Extract only the occurrence counts and return
     return [occ[1] for occ in occurrences]
 
-
-
-
 16SequentialDigitsGood.ipynb
-
-
-
-
 def SequentialDigitsGood(low,high):
     string = "123456789"
     lowC, highC = low, high
@@ -314,9 +243,5 @@ def SequentialDigitsGood(low,high):
             p2 += 1
         p1, p2 = 0, 0 # iski jarurat isley hai warna p2 = p1 + i me p1 ki purani value reh jaaegi
     return res
-
-
-
-
 
 

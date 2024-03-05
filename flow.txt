@@ -9,3 +9,6 @@ Challenges
 1. I want to ensure that we don't write those files again that have been written already <- Create a logic
     1.1 I can check if the current file has been created after the last time the code ran, and then only upload
         the changes
+    1.2 Another way is to store the question number of the last question I'm updating this time to a local file 
+        and filter out the files that have been updated before.
+        
