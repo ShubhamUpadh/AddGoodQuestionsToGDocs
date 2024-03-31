@@ -257,6 +257,338 @@ def SequentialDigitsGood(low,high):
 
 __________________________________________________________________________
 17LightBulbProblemGood.ipynb
+#https://www.interviewbit.com/problems/minimum-lights-to-activate/  
 def lightBulb(arr):
-    print(arr)
+    strength = B - 1
+    i = 0
+    count = 0
+    while i < len(A):
+        bulbfoundAt = None
+        aheadIndex = min(len(A)-1,i + strength)
+        behindIndex = max(-1,i - strength - 1)
+        for j in range(aheadIndex,behindIndex,-1):
+            if A[j] == 1:
+                foundAhead = True
+                bulbfoundAt = j
+                break
+        if bulbfoundAt is None:
+            return -1   # no bulbs found in the given range
+        i = bulbfoundAt + strength + 1
+        count += 1
+    return count
     
+  
+
+__________________________________________________________________________
+18MaxSumContiguousSubarrayKadaneGood.ipynb
+#https://www.interviewbit.com/problems/max-sum-contiguous-subarray/
+
+def maxSubArray(self, A):
+    p1,p2 = 0, 0
+    currSum, maxSum = 0, float("-inf")
+    while p2 < len(A):
+        if currSum >= 0:
+            currSum += A[p2]
+            maxSum = max(maxSum,currSum)
+            p2 += 1
+        elif currSum < 0:
+            while p1 < p2:
+                currSum -= A[p1]
+                #maxSum = max(maxSum,currSum)
+                p1 += 1
+                if currSum >= 0:
+                    break
+            if currSum < 0:
+                p2 = p2 + 1
+                p1 = p2
+                currSum = 0
+    return maxSum
+
+__________________________________________________________________________
+18MinimumLengthOfStringAfterDeletingSimilarEndsGood.ipynb
+#https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/
+def minimumLength(self, s: str) -> int:
+    if len(s) == 0 or s[0] != s[-1]:
+        return len(s)
+    start, end = 0, len(s) - 1
+    while start < end:
+        if s[start] == s[end]:
+            currChar = s[start]
+            while start < len(s) and s[start] == currChar :
+                start += 1
+            while end > -1 and  s[end] == currChar:
+                end -= 1
+            #print(s[start:end + 1],start,end)
+        else:
+            break
+    if end < start:
+        return 0
+    else:
+        return end - start + 1
+
+
+
+__________________________________________________________________________
+21CousinsInABinaryTreeGood.ipynb
+# https://leetcode.com/problems/cousins-in-binary-tree/description/
+
+class Solution:
+    def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
+        q = []
+        q.append(root)
+        while len(q):
+            foundOne, foundOther = False, False
+            for i in range(len(q)):
+                node = q.pop(0)
+                if node.left and node.left.val in (x,y) and node.right and node.right.val in (x,y):
+                    return False
+                if node.left:
+                    q.append(node.left)
+                    if node.left.val in (x,y):
+                        if foundOne is True:
+                            foundOther = True
+                        else:
+                            foundOne = True
+                if node.right:
+                    q.append(node.right)
+                    if node.right.val in (x,y):
+                        if foundOne is True:
+                            foundOther = True
+                        else:
+                            foundOne = True
+            if foundOne and foundOther:
+                return True
+        return False
+        
+
+__________________________________________________________________________
+22MinimumBracketReversalGood.ipynb
+'''
+Problem statement
+
+For a given expression in the form of a string, find the minimum number of brackets that can be reversed in order to make the expression balanced. The expression will only contain curly brackets.
+
+If the expression can't be balanced, return -1.
+
+For }{  answer is 2 {}
+
+'''
+
+
+def countBracketReversals(inputString) :
+    # Your code goes here
+    stack =[]
+    for char in inputString:    # populate the stack
+        if char == '{':
+            stack.append(char)
+        else:
+            if len(stack) == 0:
+                stack.append(char)
+            elif stack[-1] == '{':
+                stack.pop(-1)
+            else:
+                stack.append(char)
+    count = 0
+    if len(stack) % 2:      # if length of stack is odd, we can't find two pairs for reversal
+        return -1
+    while stack:
+        c1 = stack.pop()
+        c2 = stack.pop()
+        if c1 == c2:        # the following if condition is not important for this question
+            if c2 == '{':     # but it can be utilised in other question
+                c2 = '}'
+            if c1 == '}':
+                c1 = '{'
+            count += 1
+        else:
+            count += 2
+
+    return count
+
+
+__________________________________________________________________________
+23MinSquaresGood.ipynb
+import time
+def minSquares(n):
+    if n == 0:
+        return 0
+    minVal = float("inf")
+    for i in range(int(n**0.5),0,-1):
+        minVal = min(minVal, 1 + minSquares(n-i*i))
+    return minVal
+t1 = time.time()
+print(minSquares(int(input())))
+print(time.time()-t1)
+import time
+def minSquaresMemoization(n):
+    array = [None]*(n+1)
+    def minSquaresHelper(n):
+        if n == 0:
+            return 0
+        if array[n] is not None:
+            return array[n]
+        minVal = float("inf")
+        for i in range(1,int(n**0.5)+1):
+            minVal = min(minVal, 1 + minSquaresHelper(n-i*i))
+        array[n] = minVal
+        print(n,minVal)
+        return array[n]
+    minSquaresHelper(n)
+    return array[n]
+t2 = time.time()
+print(minSquaresMemoization(int(input())))
+print(time.time()-t2)        
+def minStepsTo1(n):
+    #Implement Your Code Here
+    dp = [None]*(n+1)
+    dp[0],dp[1] = 0,1
+    for i in range(n+1):
+        if i**0.5 == int(i**0.5):
+            dp[i] = 1
+    if dp[n] != None:
+        return dp[n]
+    for i in range(2,n+1):
+        if dp[i] !=1:
+            minVal = float("inf")
+            for j in range(1,int(i**0.5)+1):
+                #print(dp[i-j**2])
+                minVal = min(minVal,1+dp[i-j**2])
+            dp[i] = minVal
+    return dp[n]
+print(minStepsTo1(18))
+
+__________________________________________________________________________
+25FindDuplicatesInArrayGood.ipynb
+'''
+https://leetcode.com/problems/find-all-duplicates-in-an-array/description/
+Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, return an array of all the integers that appears twice.
+
+You must write an algorithm that runs in O(n) time and uses only constant extra space.
+'''
+
+def findDuplicates(self, arr: List[int]) -> List[int]:    # another approach can be multiplying the visited element by -1
+    duplicateArr = []
+    for i in range(len(arr)):
+        targetElement = int(arr[i]) - 1
+        if type(arr[targetElement]) is str:
+            duplicateArr.append(targetElement + 1)
+        else:
+            arr[targetElement] = str(arr[targetElement])
+
+    return duplicateArr
+
+
+__________________________________________________________________________
+26ReverseOneStackUsingAnotherGood.ipynb
+stack1 = [2,5,10]
+stack2 = []
+#print(id(stack1))
+import time
+def reverseOneStackUsingAnother(stack1,stack2):
+    while stack1:
+        temp = stack1.pop()
+        lenEl = 0
+        while stack2:
+            stack1.append(stack2.pop())
+            lenEl += 1
+        stack2.append(temp)
+        while lenEl > 0:
+            stack2.append(stack1.pop())
+            lenEl -= 1
+        #print(stack1,stack2)
+    while stack2:
+        stack1.append(stack2.pop())
+time1 = time.time()
+reverseOneStackUsingAnother(stack1,stack2)
+print(time.time()-time1)
+print(stack1)
+stack3 = [4, 0, 9, 2, 7, 1, 3, 6, 0, 3, 5, 8, 9, 2, 4, 1, 7, 6, 5, 3, 2, 8, 0, 1, 9]*200
+time2 = time.time()
+reverseOneStackUsingAnother(stack3,stack2)
+print(stack3)
+print(time.time()-time2)
+#print(stack1)
+
+__________________________________________________________________________
+27LongestCommonSubsequenceGood.ipynb
+def helper(str1,str2):
+    maxLen = 0
+    for i in range(len(str1)):
+        for j in range(len(str2)):
+            if str1[i] == str2[j]:
+                currLen += 
+
+def LCS(str1,str2):
+    maxLen = 0
+    for i in range(len(str1)):
+        for j in range(len(str2)):
+            if str1[i] == str2[j]:
+                currLen = helper(str)
+maxLenStr = ""
+def LCS(str1,str2):
+    #base case ke liye space
+    #global maxLenStr
+    if str1 == "" or str2 == "":
+        return 0
+    #recurrance relation
+    maxLen = 0
+    if str1[0] == str2[0]:
+        maxLen = 1 + LCS(str1[1:],str2[1:])
+        #maxLenStr = str1[0] + maxLenStr
+    else:
+        max1 = LCS(str1[1:],str2)
+        max2 = LCS(str1,str2[1:])
+        maxLen = max(max1,max2)
+    return maxLen
+print(LCS("abracadabraabracadabraab","cadabracadabraabr"))
+def LCS(str1,str2):
+    def helper2(str1,str2,i,j,dp):
+        if i == len(str1) or j == len(str2):
+            return 0
+        if dp[i][j] != None:
+            return dp[i][j]
+        if str1[i] == str2[j]:
+            dp[i][j] = 1 + helper2(str1,str2, i+1, j+1,dp)
+        else:
+            val1 = helper2(str1,str2, i+1, j, dp)
+            val2 = helper2(str1,str2, i, j+1, dp)
+            dp[i][j] = max(val1, val2)
+        return dp[i][j]
+    dp = [[None for i in range(max(len(str2),len(str1))+1)] for j in range(max(len(str1),len(str2))+1)]
+    return helper2(str1,str2,0,0,dp)
+    
+    helperDict ={}
+    def helper(str1,str2,i,j):
+        if i == len(str1) or j == len(str2):
+            return 0
+        if (i,j) in helperDict:
+            return helperDict[(i,j)]
+        if str1[i] == str2[j]:
+            val1 = 1 + helper(str1,str2,i+1,j+1)
+            helperDict[(i,j)] = val1
+        else:
+            val2 = helper(str1,str2,i+1,j)
+            val3 = helper(str1,str2,i,j+1)
+            helperDict[(i,j)] = max(val2,val3)
+        return helperDict[(i,j)]
+    return helper2(str1,str2,0,0)
+print(LCS("abracadabraabracadabraab","cadabracadabraabr"))
+str1 = "abc"
+str2 = "def"
+dp = [[None for i in range(len(str1)+1)] for j in range(len(str2)+1)]
+print(dp)
+def LCS(str1,str2):
+    dp = [[0 for _ in range(len(str2)+1)] for _ in range(len(str1)+1)]
+    for i in range(len(str1)-1,-1,-1):
+        for j in range(len(str2)-1,-1,-1):
+            maxVal = max(dp[i+1][j],dp[i][j+1])
+            if str1[i] == str2[j]:
+                dp[i][j] = 1 + dp[i+1][j+1]
+            else:
+                dp[i][j] = maxVal
+    for i in range(len(dp)):
+        for j in range(len(dp[0])):
+            print(dp[i][j], end =" ")
+        print()
+    return dp[0][0]
+print(LCS("abracadabraabracadabraab","cadabracadabraabr"))

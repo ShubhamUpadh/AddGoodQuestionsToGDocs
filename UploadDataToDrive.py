@@ -9,8 +9,8 @@ import os
 import time
 
 scopes = ['https://www.googleapis.com/auth/drive']
-credsFile = "credentials.json"
-tokenPickleFile = "token.pickle"
+credsFile = "credFile.json"
+tokenPickleFile = "token.pickel"
 
 class uploadData:
     def __init__(self):
@@ -34,6 +34,7 @@ class uploadData:
             with open(tokenPickleFile,"wb") as token:
                 pickle.dump(creds,token)
         return build("drive","v3",credentials=creds)
+    
     def updateFile(self,fileID,newContent):
         service = self.getAuthenticatedService()
         mediaBody = MediaIoBaseUpload(io.BytesIO(newContent.encode()), mimetype='text/plain', resumable=True)
@@ -57,9 +58,9 @@ class uploadData:
     
     def execute(self):
         self.appendToFile(self.fileID,additionalContent=self.newCodes)
-
-obj = uploadData()
-obj.execute()
+if __name__ == '__main__':
+    obj = uploadData()
+    obj.execute()
 
 '''       
 startTime = time.time()  

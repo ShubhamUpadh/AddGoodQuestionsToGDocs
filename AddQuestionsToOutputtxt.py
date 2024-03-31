@@ -1,12 +1,11 @@
 # Open file in the given directory and then check if the file has good in its name in last 4 place
 
 import os
-#import codecs
 import nbformat
 
 class QuestionRev:
     def __init__(self):
-        self.directories = [r"G:\Python Exercises\Greg Hoff"]
+        self.directories = [r"G:\\Python Exercises\\Greg Hoff"]
         self.filesList =[]
         self.filesContent = []
     
