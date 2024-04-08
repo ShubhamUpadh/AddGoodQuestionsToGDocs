@@ -10,7 +10,7 @@ import time
 
 scopes = ['https://www.googleapis.com/auth/drive']
 credsFile = "credFile.json"
-tokenPickleFile = "token.pickel"
+tokenPickleFile = "token.pickle"
 
 class uploadData:
     def __init__(self):
@@ -26,11 +26,8 @@ class uploadData:
             with open(tokenPickleFile,"rb") as tokenFile:
                 creds = pickle.load(tokenFile)
         if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(credsFile,scopes)
-                creds = flow.run_local_server(port=0)
+            flow = InstalledAppFlow.from_client_secrets_file(credsFile,scopes)
+            creds = flow.run_local_server(port=0)
             with open(tokenPickleFile,"wb") as token:
                 pickle.dump(creds,token)
         return build("drive","v3",credentials=creds)

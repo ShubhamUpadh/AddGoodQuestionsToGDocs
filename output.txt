@@ -592,3 +592,79 @@ def LCS(str1,str2):
         print()
     return dp[0][0]
 print(LCS("abracadabraabracadabraab","cadabracadabraabr"))
+
+__________________________________________________________________________
+28FindMinimumInSortedRotatedArrayGood.ipynb
+'''
+https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
+Given the sorted rotated array nums of unique elements, return the minimum element of this array.
+You must write an algorithm that runs in O(log n) time.
+'''
+
+def findMin(self, a: List[int]) -> int:
+    if len(a) < 2:
+        return a[0]
+    if a[0] < a[-1]:    # 0 rotation
+        return a[0]
+    if a[-1] < a[-2]:
+        return a[-1]
+    low, high = 0, len(a) - 1
+    while low <= high:
+        mid = (low + high)// 2
+        #print(low,high,mid)
+        if a[mid] < a[mid-1] and a[mid] < a[mid+1]:
+            return a[mid]
+        elif a[mid] >= a[0]:
+            low = mid + 1
+        elif a[mid] <= a[-1]:
+            high = mid - 1
+
+            
+# for non unique elements -> arr = [6,7,7,7,7,11,11,11,11,11,12,13,13,13,13,2,2,3,4,4,5]
+
+def findMin(a: list[int]) -> int:
+    if len(a) < 2:
+        return a[0]
+    if a[0] < a[-1]:    # 0 rotation
+        return a[0]
+    if a[-1] < a[-2]:
+        return a[-1]
+    low, high = 0, len(a) - 1
+    while low <= high:
+        mid = (low + high)// 2
+        #print(low,high,mid)
+        if (a[mid] <= a[mid-1] and a[mid] < a[mid+1]) or (a[mid] < a[mid-1] and a[mid] <= a[mid+1]):
+            return a[mid]
+        elif a[mid] >= a[0]:
+            low = mid + 1
+        elif a[mid] <= a[-1]:
+            high = mid - 1
+
+
+__________________________________________________________________________
+29FindTheMaxFriendsThatCanBeMetGood.ipynb
+'''https://www.naukri.com/code360/problems/kurapika-and-friends_2279827?leftPanelTabValue=PROBLEM
+Kurapika is long lost from his friends. He wants to meet his friends. He has total ‘n’ friends, and everyone is not available on the same day. But he can meet his friends only once. Given two arrays, ‘s’ and ‘e’, where s[i] denotes the starting date when an ith friend is available, and e[i] denotes when the ith friend will not be available after this date. Help Kurapika to know what is the maximum number of friends he can meet on one single day.
+For Example :
+
+s = {1, 4, 11} e = {9, 5, 13}
+
+In the given example, the first friend is available between dates 1 to 9, the second is available on dates 4 and 5, and the third is available on dates 11 to 13. Hence he can meet a maximum of only two friends on dates 4 and 5.
+
+Hence the answer is 2.
+'''
+
+
+def maxFriends(n: int, s: List[int], e: List[int]) -> int:
+    # write your code here
+    availArr = []
+    for start, end in zip(s,e):
+        availArr.append((start,1))
+        availArr.append((end+1,-1))   # end + 1 kyuki hum friend ko uss din bhi mil skte hai
+    counter, maxF = 0, 0
+    availArr.sort()
+    for status in availArr:
+        counter += status[1]
+        maxF = max(maxF,counter)
+    return maxF
+
